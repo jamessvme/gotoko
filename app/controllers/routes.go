@@ -29,6 +29,7 @@ func (server *Server) initializeRoutes() {
 
 	server.Router.HandleFunc("/orders/checkout", server.Checkout).Methods("POST")
 
-	
+	staticFileDirectory := http.Dir("./assets/")
+	staticFileHandler := http.StripPrefix("/public/", http.FileServer(staticFileDirectory))
 	server.Router.PathPrefix("/public/").Handler(staticFileHandler).Methods("GET")
 }
